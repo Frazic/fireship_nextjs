@@ -12,7 +12,7 @@ export default function Enter(props) {
     */
     return (
         <main>
-            {user ? username ? <SignOutButton /> : <UsernameForm /> : <SignInButton />}
+            {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
         </main>
     )
 }
@@ -28,9 +28,6 @@ function SignInButton() {
             <button className="btn-google" onClick={signInWithGoogle}>
                 <img src={'/google.png'} width="30px" /> Sign in with Google
             </button>
-            <button onClick={() => auth.signInAnonymously()}>
-                Sign in Anonymously
-            </button>
         </>
     );
 }
@@ -41,5 +38,5 @@ function SignOutButton() {
 }
 
 function UsernameForm() {
-
+    return <div>Hi</div>
 }
