@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { auth, googleAuthProvider } from "../lib/firebase";
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
 
-export default function EnterPage({ }) {
-    const user = null;
-    const username = null;
+export default function Enter(props) {
+    const { user, username } = useContext(UserContext);
 
     /*
     1. User signed out => Show SignInButton
@@ -12,12 +12,7 @@ export default function EnterPage({ }) {
     */
     return (
         <main>
-            {
-                user ?
-                    username ? <SignOutButton /> : <UsernameForm />
-                    :
-                    <SignInButton />
-            }
+            {user ? username ? <SignOutButton /> : <UsernameForm /> : <SignInButton />}
         </main>
     )
 }
@@ -29,15 +24,20 @@ function SignInButton() {
     };
 
     return (
-        <button className="btn-google" onClick={signInWithGoogle}>
-            <img src="/google.png" alt="Google logo" width="30px" height="30px" style={{ marginRight: "10px" }} />Sign in with Google
-        </button>
-    )
+        <>
+            <button className="btn-google" onClick={signInWithGoogle}>
+                <img src={'/google.png'} width="30px" /> Sign in with Google
+            </button>
+            <button onClick={() => auth.signInAnonymously()}>
+                Sign in Anonymously
+            </button>
+        </>
+    );
 }
 
 // Sign out button
 function SignOutButton() {
-    return <button onClick={() => auth.signOut}>Sign Out</button>
+    return <button onClick={() => auth.signOut()}> Sign Out</button >
 }
 
 function UsernameForm() {
