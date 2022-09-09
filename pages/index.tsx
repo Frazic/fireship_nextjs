@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
 
+import Loader from '../components/Loader';
+
 export default function Home() {
   return (
     <div>
@@ -12,6 +14,9 @@ export default function Home() {
       }}>
         <a>Jeff's Profile</a>
       </Link>
+      <div>
+        <Loader show></Loader>
+      </div>
     </div >
   );
 }
