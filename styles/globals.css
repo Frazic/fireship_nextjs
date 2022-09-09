@@ -89,11 +89,11 @@ code {
   width: 50px;
   height: 50px;
   cursor: pointer;
+  margin: 0.5rem 1rem 0.5rem 0;
 }
 
 .navbar li {
   border-radius: 50%;
-
 }
 
 /* Buttons */
