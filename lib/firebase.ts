@@ -22,3 +22,32 @@ export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
+
+// Helper functions
+
+/**
+ * Gets a users/{uid} document from a username
+ * @param {string} username
+ * @returns userDoc
+ */
+export async function getUserWithUsername(username) {
+    const usersRef = firestore.collection('users');
+    const query = usersRef.where('username', '==', username).limit(1);
+    const userDoc = (await query.get()).docs[0];
+    return userDoc;
+}
+
+/**
+ * Converts firestore document into JSON
+ * @param {firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>} doc Post document from firestore
+ * @returns {JSON} JSON serialisable document
+ */
+export function postToJSON(doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>) {
+    const data = doc.data();
+    return {
+        ...data,
+        // Turn firestore timestamp into JSON serialisable
+        createdAt: data.createdAt.toMillis(),
+        updatedAt: data.updatedAt.toMillis(),
+    };
+}

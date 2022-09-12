@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { auth, firestore, googleAuthProvider } from "../lib/firebase";
 import { useCallback, useContext, useEffect, useState } from "react";
 import debounce from 'lodash.debounce';
@@ -35,7 +36,7 @@ function SignInButton() {
     return (
         <>
             <button className="btn-google" onClick={signInWithGoogle}>
-                <img src={'/google.png'} width="30px" /> Sign in with Google
+                <img src={'/google.png'} width="30px" alt="google logo" /> Sign in with Google
             </button>
         </>
     );
@@ -100,7 +101,7 @@ function UsernameForm() {
 
         // Commit both docs together
         const batch = firestore.batch();
-        batch.set(userDoc, { username: formValue, photoUrl: user.photoURL, displayName: user.displayName });
+        batch.set(userDoc, { username: formValue, photoURL: user.photoURL, displayName: user.displayName });
         batch.set(usernameDoc, { uid: user.uid });
 
         await batch.commit();
