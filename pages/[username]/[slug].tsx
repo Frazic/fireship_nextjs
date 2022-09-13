@@ -1,5 +1,7 @@
 import styles from "../../styles/Post.module.css"
 import { firestore, getUserWithUsername, postToJSON } from "../../lib/firebase"
+import { useDocumentData } from "react-firebase-hooks/firestore"
+import PostContent from "../../components/PostContent";
 
 // Tells next to get data from server at build time
 export async function getStaticProps({ params }) {
@@ -46,8 +48,25 @@ export async function getStaticPaths() {
 }
 
 export default function Post(props) {
+    // Easy access to document with direct path inside firestore
+    const postRef = firestore.doc(props.path);
+    const [realtimePost] = useDocumentData(postRef);
+
+    // Gets the latest version of the post, or fallsback to the prerendered data
+    const post = realtimePost || props.post;
+
     return (
         <main className={styles.container}>
+
+            <section>
+                <PostContent post={post} />
+            </section>
+
+            <aside className="card">
+                <p>
+                    <strong>{post.heartCount || 0} 💗</strong>
+                </p>
+            </aside>
         </main>
     )
 }
