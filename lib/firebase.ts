@@ -44,10 +44,14 @@ export async function getUserWithUsername(username) {
  */
 export function postToJSON(doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>) {
     const data = doc.data();
+    if (!data) {
+        return null;
+    }
+
     return {
         ...data,
         // Turn firestore timestamp into JSON serialisable
-        createdAt: data.createdAt.toMillis(),
-        updatedAt: data.updatedAt.toMillis(),
+        createdAt: data?.createdAt?.toMillis() || 0,
+        updatedAt: data?.updatedAt?.toMillis() || 0,
     };
 }

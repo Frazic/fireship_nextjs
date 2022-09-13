@@ -17,7 +17,14 @@ export async function getStaticProps({ params }) {
     if (userDoc) {
         // If user doc exists then get the post using the slug as ID
         const postRef = userDoc.ref.collection("posts").doc(slug);
+
         post = postToJSON(await postRef.get());
+        // If no post is found, short circuit to 404
+        if (!post) {
+            return {
+                notFound: true,
+            };
+        }
 
         // This will be used to make it easier to refetch data during later hydration
         path = postRef.path;
