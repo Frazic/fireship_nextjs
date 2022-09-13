@@ -4,6 +4,7 @@ import { firestore, postToJSON } from "../lib/firebase";
 import PostFeed from "../components/PostFeed";
 import Loader from "../components/Loader";
 import firebase from "firebase";
+import MetaTags from "../components/Metatags";
 
 // Max post to query per page
 const LIMIT = 1;
@@ -69,6 +70,7 @@ export default function Home(props) {
 
   return (
     <main>
+      <MetaTags title="Home page" description="Main home page for Frazic's post feed website" image="https://lh3.googleusercontent.com/a-/AFdZucpBLmv3DVtRfYoHQAqKDmAMJD0F61KyFVffI3hf0w=s96-c" />
       <PostFeed posts={posts} admin={false} />
 
       {/* Show load more button if we're not loading and aren't at the end  */}

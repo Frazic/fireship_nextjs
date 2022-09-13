@@ -2,6 +2,7 @@ import styles from "../../styles/Post.module.css"
 import { firestore, getUserWithUsername, postToJSON } from "../../lib/firebase"
 import { useDocumentData } from "react-firebase-hooks/firestore"
 import PostContent from "../../components/PostContent";
+import MetaTags from "../../components/Metatags";
 
 // Tells next to get data from server at build time
 export async function getStaticProps({ params }) {
@@ -64,6 +65,7 @@ export default function Post(props) {
 
     return (
         <main className={styles.container}>
+            <MetaTags title={post?.title || "Post title"} description={`Post by ${post?.username}`} />
 
             <section>
                 <PostContent post={post} />

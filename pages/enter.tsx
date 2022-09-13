@@ -5,8 +5,11 @@ import debounce from 'lodash.debounce';
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
 import SignOutButton from "../components/SignOut";
+import MetaTags from "../components/Metatags";
 
 export default function Enter() {
+    <MetaTags title="Login page" />
+
     const { user, username } = useContext(UserContext);
 
     /*
