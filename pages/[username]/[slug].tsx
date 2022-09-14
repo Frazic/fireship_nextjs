@@ -3,6 +3,7 @@ import { firestore, getUserWithUsername, postToJSON } from "../../lib/firebase"
 import { useDocumentData } from "react-firebase-hooks/firestore"
 import PostContent from "../../components/PostContent";
 import MetaTags from "../../components/Metatags";
+import HeartCount from "../../components/HeartCount";
 
 // Tells next to get data from server at build time
 export async function getStaticProps({ params }) {
@@ -73,7 +74,7 @@ export default function Post(props) {
 
             <aside className="card">
                 <p>
-                    <strong>{post.heartCount || 0} 💗</strong>
+                    <strong><HeartCount heartCount={post.heartCount} /></strong>
                 </p>
             </aside>
         </main>

@@ -10,7 +10,7 @@ import { fromMillis } from "../lib/firebase";
 const LIMIT = 1;
 
 // Have the server get the latest posts from firestore
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const postsQuery = firestore
     .collectionGroup('posts')
     .where('published', '==', true)
@@ -36,6 +36,11 @@ export default function Home(props) {
   const [postsEnd, setPostsEnd] = useState(false);
 
   const getMorePosts = async () => {
+    if (posts.length == 0) {
+      setPostsEnd(true);
+      return;
+    }
+
     setLoading(true);
 
     // Get the last post from the current list to run a paginated query

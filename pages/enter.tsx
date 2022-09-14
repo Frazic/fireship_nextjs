@@ -126,6 +126,5 @@ function UsernameForm() {
                 </form>
             </section>
         )
-
     );
 }
