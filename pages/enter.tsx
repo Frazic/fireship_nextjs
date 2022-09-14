@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
 import SignOutButton from "../components/SignOut";
 import MetaTags from "../components/Metatags";
+import InputValidationMessage from "../components/InputValidationMessage";
 
 export default function Enter() {
     <MetaTags title="Login page" />
@@ -117,36 +118,14 @@ function UsernameForm() {
                 <form onSubmit={onSubmit}>
                     <input name="username" placeholder="username" value={formValue} onChange={onChange}></input>
 
-                    <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
+                    <InputValidationMessage value={username} valueName="username" isValid={isValid} loading={loading} />
 
                     <button type="submit" className="btn-green" disabled={!isValid}>
                         Choose
                     </button>
-
-                    <h3>Debug State</h3>
-                    <div>
-                        Username: {formValue}
-                        <br />
-                        Loading: {loading.toString()}
-                        <br />
-                        Valid: {isValid.toString()}
-                    </div>
-
                 </form>
             </section>
         )
 
     );
-}
-
-function UsernameMessage({ username, isValid, loading }) {
-    if (loading) {
-        return <p>Checking...</p>;
-    } else if (isValid) {
-        return <p className="text-success">{username} is available!</p>;
-    } else if (username && !isValid) {
-        return <p className="text-danger">That username is taken :c</p>;
-    } else {
-        return <p></p>;
-    }
 }

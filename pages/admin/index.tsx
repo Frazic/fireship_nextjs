@@ -5,12 +5,14 @@ import PostFeed from '../../components/PostFeed';
 import { UserContext } from '../../lib/context';
 import { firestore, auth, serverTimestamp } from '../../lib/firebase';
 
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { useCollection } from 'react-firebase-hooks/firestore';
 import kebabCase from 'lodash.kebabcase';
 import toast from 'react-hot-toast';
+import debounce from "lodash.debounce";
+import InputValidationMessage from "../../components/InputValidationMessage";
 
 export default function AdminPostsPage({ }) {
     return (
@@ -48,12 +50,36 @@ function CreateNewPost() {
     const { username } = useContext(UserContext);
 
     const [title, setTitle] = useState("");
+    const [isValid, setIsValid] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     // Ensure slug is URI safe
     const slug = encodeURI(kebabCase(title));
 
-    // Validate length
-    const isValid = title.length > 3 && title.length < 100;
+    // Check slug validity when title changes
+    useEffect(() => {
+        checkSlug(slug);
+    }, [title]);
+
+    const onChange = (e) => {
+        setTitle(e.target.value);
+        setLoading(true);
+        setIsValid(false);
+    }
+
+    // Checks slug against firestore to avoid duplicates
+    const checkSlug = useCallback(
+        debounce(async (slug) => {
+            if (slug.length > 3 && slug.length < 100) {
+                const ref = firestore.collection("users").doc(auth.currentUser.uid).collection("posts").doc(slug);
+                const { exists } = await ref.get();
+                console.log(`Firestore read executed for ${slug}`);
+                setIsValid(!exists);
+                setLoading(false);
+            }
+        }, 500),
+        []
+    );
 
     const createPost = async (e) => {
         e.preventDefault();
@@ -88,7 +114,7 @@ function CreateNewPost() {
         <form onSubmit={createPost}>
             <input
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={onChange}
                 placeholder="My Awesome Article"
                 className={styles.input}
             />
@@ -96,6 +122,8 @@ function CreateNewPost() {
             <p>
                 <strong>Slug: </strong> {slug}
             </p>
+
+            <InputValidationMessage value={title} valueName="title" isValid={isValid} loading={loading} />
 
             <button type="submit" disabled={!isValid} className="btn-green">
                 Create new post
