@@ -3,8 +3,8 @@ import { firestore, postToJSON } from "../lib/firebase";
 
 import PostFeed from "../components/PostFeed";
 import Loader from "../components/Loader";
-import firebase from "firebase";
 import MetaTags from "../components/Metatags";
+import { fromMillis } from "../lib/firebase";
 
 // Max post to query per page
 const LIMIT = 1;
@@ -24,8 +24,6 @@ export async function getServerSideProps(context) {
     props: { posts },
   };
 }
-
-export const fromMillis = firebase.firestore.Timestamp.fromMillis;
 
 export default function Home(props) {
   // Use posts as state
