@@ -247,6 +247,12 @@ input[type="file"] {
   color: var(--color-blue);
 }
 
+.text-link {
+  font-weight: bold;
+  color: var(--color-blue);
+  text-decoration: underline;
+}
+
 .box {
   display: flex;
   justify-content: space-between;
