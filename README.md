@@ -4,6 +4,10 @@ Install NVM: <https://github.com/nvm-sh/nvm#installing-and-updating>
 Install Node: `nvm install node`  
 Install components: `npm install`
 
+## TODO
+
+Posts from list arrives on screen with slide transition
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
