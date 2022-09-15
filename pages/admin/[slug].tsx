@@ -2,6 +2,8 @@ import styles from '../../styles/Admin.module.css';
 import AuthCheck from '../../components/AuthCheck';
 import { firestore, auth, serverTimestamp } from '../../lib/firebase';
 
+import ImageUploader from '../../components/ImageUploader';
+
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -98,6 +100,8 @@ function PostForm({ postRef, defaultValues, preview }) {
                     <ReactMarkdown>{watch("content")}</ReactMarkdown>
                 </div>
             )}
+
+            <ImageUploader />
 
             {/* When not in preview mode, show controls for the form */}
             <div className={preview ? styles.hidden : styles.controls}>

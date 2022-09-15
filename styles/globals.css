@@ -217,10 +217,11 @@ input[type="file"] {
 
 .upload-snippet {
   width: 75%;
-    margin-left: auto;
-    background: white;
-    padding: 5px;
-    margin: 5px 0;
+  margin-left: auto;
+  background: white;
+  padding: 5px;
+  margin: 5px 0;
+  border:5px solid gray;
 }
 /* Utilities */
 
@@ -280,4 +281,10 @@ input[type="file"] {
 
 .count-text {
   margin-top:15px;
+}
+
+.grid-image-upload-snippet {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 10px 100px;
 }
