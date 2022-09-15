@@ -68,7 +68,7 @@ function PostForm({ postRef, defaultValues, preview }) {
     // Register controls which part of the form we are interacting with
     //  Ex: textarea controls the content, checkbox controls the published status etc
     const { register, handleSubmit, formState: { errors, isValid, isDirty }, reset, watch } = useForm({ defaultValues, mode: "onChange" });
-    const [charCount, setCharCount] = useState(0);
+    const [charCount, setCharCount] = useState(defaultValues.content.length);
     const maxLength = 30000;
 
     const updatePost = async ({ content, published }) => {
@@ -102,10 +102,18 @@ function PostForm({ postRef, defaultValues, preview }) {
             {/* When not in preview mode, show controls for the form */}
             <div className={preview ? styles.hidden : styles.controls}>
                 {/* Text input with client-side validation*/}
-                <textarea className="custom-textarea" name="content" placeholder="Write some content here" onInput={updateCount} maxLength={maxLength} {...register("content", {
-                    maxLength: { value: maxLength, message: "Content is too long!" },
-                    required: { value: true, message: "Content is required" },
-                })}></textarea>
+                <textarea
+                    className="custom-textarea"
+                    name="content"
+                    placeholder="Write some content here"
+                    onInput={updateCount}
+                    maxLength={maxLength}
+                    {...register("content", {
+                        required: { value: true, message: "Content is required" },
+                    })}
+                ></textarea>
+
+                {/* Character count indicator for textarea */}
                 <div className="count-div">
                     <div className="count-text">{formatNumber(charCount)}/{formatNumber(maxLength)}</div>
                 </div>
