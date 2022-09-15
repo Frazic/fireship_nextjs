@@ -293,5 +293,5 @@ input[type="file"] {
 
 .markdown-word-wrap {
   overflow-wrap: break-word;
-  hyphens: manual;
+  hyphens: auto;
 }
