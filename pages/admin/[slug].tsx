@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import { numberFormatter } from '../../lib/utils';
+import { formatNumber } from '../../lib/utils';
 
 export default function AdminPostEdit(props) {
     return (
@@ -107,7 +107,7 @@ function PostForm({ postRef, defaultValues, preview }) {
                     required: { value: true, message: "Content is required" },
                 })}></textarea>
                 <div className="count-div">
-                    <div className="count-text">{numberFormatter(charCount)}/{numberFormatter(maxLength)}</div>
+                    <div className="count-text">{formatNumber(charCount)}/{formatNumber(maxLength)}</div>
                 </div>
 
                 {/* Potential error message */}

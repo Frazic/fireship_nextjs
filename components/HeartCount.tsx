@@ -1,5 +1,5 @@
-import { numberFormatter } from "../lib/utils";
+import { formatNumber } from "../lib/utils";
 
 export default function HeartCount({ heartCount }) {
-    return <p className="heart-count">💗 {`${numberFormatter(heartCount)}`}</p>;
+    return <p className="heart-count">💗 {`${formatNumber(heartCount)}`}</p>;
 }
