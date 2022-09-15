@@ -266,3 +266,18 @@ input[type="file"] {
 }
 
 .hidden { display:  none; }
+
+.custom-textarea {
+  outline: none;
+  overflow: auto;
+}
+
+.count-div {
+  color: grey;
+  font-size: 14px;
+  border-left:0;
+}
+
+.count-text {
+  margin-top:15px;
+}

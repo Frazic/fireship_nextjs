@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { numberFormatter } from '../../lib/utils';
 
 export default function AdminPostEdit(props) {
     return (
@@ -67,6 +68,8 @@ function PostForm({ postRef, defaultValues, preview }) {
     // Register controls which part of the form we are interacting with
     //  Ex: textarea controls the content, checkbox controls the published status etc
     const { register, handleSubmit, formState: { errors, isValid, isDirty }, reset, watch } = useForm({ defaultValues, mode: "onChange" });
+    const [charCount, setCharCount] = useState(0);
+    const maxLength = 30000;
 
     const updatePost = async ({ content, published }) => {
         // Write to firestore
@@ -82,6 +85,10 @@ function PostForm({ postRef, defaultValues, preview }) {
         toast.success("Post updated!");
     }
 
+    function updateCount(e) {
+        setCharCount(e.target.value.length);
+    }
+
     return (
         <form onSubmit={handleSubmit(updatePost)}>
             {/* When in preview mode, watch the content and render it as markdown.
@@ -94,8 +101,14 @@ function PostForm({ postRef, defaultValues, preview }) {
 
             {/* When not in preview mode, show controls for the form */}
             <div className={preview ? styles.hidden : styles.controls}>
-                {/* Text input */}
-                <textarea name="content" {...register("content")}></textarea>
+                {/* Text input with client-side validation*/}
+                <textarea className="custom-textarea" name="content" placeholder="Write some content here" onInput={updateCount} maxLength={maxLength} {...register("content", {
+                    maxLength: { value: maxLength, message: "Content is too long!" },
+                    required: { value: true, message: "Content is required" },
+                })}></textarea>
+                <div className="count-div">
+                    <div className="count-text">{numberFormatter(charCount)}/{numberFormatter(maxLength)}</div>
+                </div>
 
                 {/* Potential error message */}
                 {errors?.content && <p className="text-danger">{errors.content.message.toString()}</p>}
@@ -106,8 +119,9 @@ function PostForm({ postRef, defaultValues, preview }) {
                     <label>Published</label>
                 </fieldset>
 
-                {/* Submit button */}
-                <button type="submit" className="btn-green">
+                {/* Submit button
+                Only disable if invalid or if user hasn't changed the content*/}
+                <button type="submit" className="btn-green" disabled={!isValid || !isDirty}>
                     Save Changes
                 </button>
             </div>
