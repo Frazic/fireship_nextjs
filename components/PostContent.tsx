@@ -16,7 +16,7 @@ export default function PostContent({ post }) {
                 </Link>{' '}
                 on {createdAt.toLocaleDateString("en-GB", options)}
             </span>
-            <ReactMarkdown>{post?.content}</ReactMarkdown>
+            <ReactMarkdown className="markdown-word-wrap">{post?.content}</ReactMarkdown>
         </div>
     );
 }

@@ -73,9 +73,9 @@ export default function Post(props) {
             </section>
 
             <aside className="card">
-                <p>
+                <div>
                     <strong><HeartCount heartCount={post.heartCount} /></strong>
-                </p>
+                </div>
             </aside>
         </main>
     )
