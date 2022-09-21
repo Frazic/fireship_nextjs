@@ -4,7 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import debounce from 'lodash.debounce';
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
-import SignOutButton from "../components/SignOut";
+import SignOutButton from "../components/SignOutButton";
 import MetaTags from "../components/Metatags";
 import InputValidationMessage from "../components/InputValidationMessage";
 
