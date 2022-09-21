@@ -77,7 +77,7 @@ export default function Home(props) {
       <PostFeed posts={posts} admin={false} />
 
       {/* Show load more button if we're not loading and aren't at the end  */}
-      {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
+      {!loading && !postsEnd && <button title="Load more posts" onClick={getMorePosts}>Load more</button>}
 
       {/* Loader will be visible when loading=true */}
       <Loader show={loading} />

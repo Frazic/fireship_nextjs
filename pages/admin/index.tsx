@@ -28,7 +28,7 @@ export default function AdminPostsPage({ }) {
 
 function PostList() {
     // Reference to the currently authenticated user's posts in firestore
-    const ref = firestore.collection("users").doc(auth.currentUser.uid).collection("posts");
+    const ref = firestore.collection("users").doc(auth?.currentUser?.uid).collection("posts");
     const query = ref.orderBy("createdAt");
 
     // Hook to read collection in realtime
@@ -113,6 +113,7 @@ function CreateNewPost() {
     return (
         <form onSubmit={createPost}>
             <input
+                title="Post title"
                 value={title}
                 onChange={onChange}
                 placeholder="My Awesome Article"
@@ -125,7 +126,7 @@ function CreateNewPost() {
 
             <InputValidationMessage value={title} valueName="title" isValid={isValid} loading={loading} />
 
-            <button type="submit" disabled={!isValid} className="btn-green">
+            <button title="Create new post" type="submit" disabled={!isValid} className="btn-green">
                 Create new post
             </button>
         </form>

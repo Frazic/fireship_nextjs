@@ -4,6 +4,9 @@ import { useDocumentData } from "react-firebase-hooks/firestore"
 import PostContent from "../../components/PostContent";
 import MetaTags from "../../components/Metatags";
 import HeartCount from "../../components/HeartCount";
+import AuthCheck from "../../components/AuthCheck";
+import HeartButton from "../../components/HeartButton";
+import Link from "next/link";
 
 // Tells next to get data from server at build time
 export async function getStaticProps({ params }) {
@@ -76,7 +79,18 @@ export default function Post(props) {
                 <div>
                     <strong><HeartCount heartCount={post.heartCount} /></strong>
                 </div>
+
+                {/* Show heart button for signed-in users, or link to sign-up page */}
+                <AuthCheck
+                    fallback={
+                        <Link href="/enter">
+                            <button>💗 Sign Up</button>
+                        </Link>
+                    }
+                >
+                    <HeartButton postRef={postRef} />
+                </AuthCheck>
             </aside>
-        </main>
+        </main >
     )
 }

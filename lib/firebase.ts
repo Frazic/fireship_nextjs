@@ -28,6 +28,9 @@ export const fromMillis = firebase.firestore.Timestamp.fromMillis;
 // Function used to include server-generated timestamp onto a document
 export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 
+// Allows to update a count without having to know the exact number
+export const increment = firebase.firestore.FieldValue.increment;
+
 export const storage = firebase.storage();
 
 // Used to tell progress of file upload

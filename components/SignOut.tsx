@@ -1,5 +1,11 @@
+import { useRouter } from "next/router"
 import { auth } from "../lib/firebase"
 
 export default function SignOutButton({ }) {
-    return <button onClick={() => auth.signOut()}> Sign Out</button >
+    const router = useRouter();
+    const signOut = () => {
+        router.push("/");
+        auth.signOut();
+    }
+    return <button title="Sign Out" onClick={signOut}> Sign Out</button >
 }
