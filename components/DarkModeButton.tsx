@@ -11,13 +11,15 @@ export default function DarkModeButton() {
 
     return (
         <>
-            {isDarkMode &&
-                <button title="Light mode" className="btn-theme">
+            {
+                isDarkMode &&
+                <button title="Light mode" className="btn-theme" onClick={ChangeMode}>
                     < img src={'/sun.png'} width="15px" alt="Light mode" />
                 </button>
             }
 
-            {!isDarkMode &&
+            {
+                !isDarkMode &&
                 <button title="Dark mode" className="btn-theme" onClick={ChangeMode}>
                     < img src={'/moon.png'} alt="Dark mode" />
                 </button>
