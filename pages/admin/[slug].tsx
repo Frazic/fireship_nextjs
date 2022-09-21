@@ -146,12 +146,45 @@ function PostForm({ postRef, defaultValues, preview }) {
 function DeletePostButton({ postRef }) {
     const router = useRouter();
 
+    // Thanks to https://stackoverflow.com/a/64106171
+    // Deleting post now deletes hearts collection with it
+    const deleteHearts = async () => {
+        const collectionRef = postRef.collection("hearts");
+
+        return new Promise((resolve, reject) => {
+            deleteQueryBatch(collectionRef, resolve).catch(reject)
+        })
+    }
+    const deleteQueryBatch = async (collectionRef, resolve) => {
+        const snapshot = await collectionRef.get();
+        const batchSize = snapshot.size;
+        if (batchSize == 0) {
+            // Nothing left to delete
+            resolve();
+            return;
+        }
+
+        // Delete documents in a batch
+        const batch = firestore.batch();
+        snapshot.docs.forEach((doc) => {
+            batch.delete(doc.ref);
+        });
+        await batch.commit();
+
+        // Recurse on the next process tick, to avoid
+        // exploding the stack.
+        process.nextTick(() => {
+            deleteQueryBatch(collectionRef, resolve);
+        });
+    }
+
     const deletePost = async () => {
         const doIt = confirm('Are you sure?');
         if (doIt) {
+            deleteHearts();
             await postRef.delete();
             router.push('/admin');
-            toast('post deleted ', { icon: '🗑️' });
+            toast('Post deleted!', { icon: '🗑️' });
         }
     };
 
