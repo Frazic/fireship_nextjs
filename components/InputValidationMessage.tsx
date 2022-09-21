@@ -18,8 +18,14 @@ export default function InputValidationMessage({ value, valueName, isValid, load
         return <p>Checking...</p>;
     } else if (isValid) {
         return <p className="text-success">{'"'}{value}{'"'} is available!</p>;
-    } else if (value && !isValid) {
-        return <p className="text-danger">That {valueName.toLowerCase()} is taken :c</p>;
+    } else if (!isValid) {
+        if (value) {
+            if (value.length >= 3 && value.length <= 100) {
+                return <p className="text-danger">That {valueName.toLowerCase()} is taken :c</p>;
+            } else {
+                return <p className="text-danger">Title must be between 3 and 100 characters, yours is {value.length} characters long</p>
+            }
+        }
     } else {
         return <p></p>;
     }

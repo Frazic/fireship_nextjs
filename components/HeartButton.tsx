@@ -4,7 +4,7 @@ import { auth, firestore, increment } from "../lib/firebase";
 // Takes reference to a post as prop
 export default function HeartButton({ postRef }) {
     // Listen to the authenticated user's 'heart' document on the post
-    const heartRef = postRef.collection("hearts").doc(auth.currentUser.uid);
+    const heartRef = postRef.collection("hearts").doc(auth.currentUser?.uid);
     const [heartDoc] = useDocument(heartRef);
 
     const addHeart = async () => {
@@ -31,8 +31,8 @@ export default function HeartButton({ postRef }) {
 
     // If the document exists then user has hearted post, otherwise they haven't
     return heartDoc?.exists ? (
-        <button title="Unheart" style={{ marginRight: 0 }} onClick={removeHeart}>💔 Unheart</button>
+        <button title="Unheart" className="btn-heart" onClick={removeHeart}>💔 Unheart</button>
     ) : (
-        <button title="Heart" style={{ marginRight: 0 }} onClick={addHeart}>💗 Heart</button>
+        <button title="Heart" className="btn-heart" onClick={addHeart}>💗 Heart</button>
     )
 }

@@ -30,7 +30,7 @@ function PostManager() {
     const { slug } = router.query;
 
     // Get reference to post in firestore
-    const postRef = firestore.collection("users").doc(auth.currentUser.uid).collection("posts").doc(slug.toString());
+    const postRef = firestore.collection("users").doc(auth.currentUser?.uid).collection("posts").doc(slug.toString());
 
     // Hook onto document data and listen to it in realtime
     const [post] = useDocumentData(postRef);
@@ -55,6 +55,8 @@ function PostManager() {
                         <Link href={`/${post.username}/${post.slug}`}>
                             <button className="btn-blue">Live view</button>
                         </Link>
+
+                        <DeletePostButton postRef={postRef} />
                     </aside>
                 </>
             )
@@ -96,12 +98,12 @@ function PostForm({ postRef, defaultValues, preview }) {
             {/* When in preview mode, watch the content and render it as markdown.
             Watch means it will update when changed by user */}
             {preview && (
-                <div className="card">
+                <div className="card markdown-word-wrap">
                     <ReactMarkdown>{watch("content")}</ReactMarkdown>
                 </div>
             )}
 
-            <ImageUploader />
+            {!preview && <ImageUploader />}
 
             {/* When not in preview mode, show controls for the form */}
             <div className={preview ? styles.hidden : styles.controls}>
@@ -138,5 +140,24 @@ function PostForm({ postRef, defaultValues, preview }) {
                 </button>
             </div>
         </form>
+    );
+}
+
+function DeletePostButton({ postRef }) {
+    const router = useRouter();
+
+    const deletePost = async () => {
+        const doIt = confirm('Are you sure?');
+        if (doIt) {
+            await postRef.delete();
+            router.push('/admin');
+            toast('post deleted ', { icon: '🗑️' });
+        }
+    };
+
+    return (
+        <button className="btn-red" onClick={deletePost}>
+            Delete
+        </button>
     );
 }

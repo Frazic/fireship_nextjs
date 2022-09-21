@@ -70,11 +70,14 @@ function CreateNewPost() {
     // Checks slug against firestore to avoid duplicates
     const checkSlug = useCallback(
         debounce(async (slug) => {
-            if (slug.length > 3 && slug.length < 100) {
+            if (slug.length >= 3 && slug.length <= 100) {
                 const ref = firestore.collection("users").doc(auth.currentUser.uid).collection("posts").doc(slug);
                 const { exists } = await ref.get();
                 console.log(`Firestore read executed for ${slug}`);
                 setIsValid(!exists);
+                setLoading(false);
+            } else {
+                setIsValid(false);
                 setLoading(false);
             }
         }, 500),

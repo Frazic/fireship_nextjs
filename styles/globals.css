@@ -166,6 +166,12 @@ button.btn-logo {
   padding: 0.5rem 1rem;
 }
 
+button.btn-heart {
+  margin-right: 0px;
+  background-color: #82ccdd;
+  /* color: white; */
+}
+
 /* Cards */
 
 .card {
