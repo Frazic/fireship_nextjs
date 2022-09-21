@@ -20,12 +20,12 @@ export default function Navbar() {
                 {username && (
                     <>
                         <li className="push-left">
+                            <SignOutButton />
+                        </li>
+                        <li>
                             <Link href="/admin">
                                 <button title="Write Posts" className="btn-blue">Your Posts</button>
                             </Link>
-                        </li>
-                        <li>
-                            <SignOutButton />
                         </li>
                         <li>
                             <Link href={`/${username}`}>
