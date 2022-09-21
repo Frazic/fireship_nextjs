@@ -60,13 +60,13 @@ function UsernameForm() {
 
     const onChange = (e) => {
         // Set username to lowercase
-        const val = e.target.value.toLowerCase();
+        const val = e.target.value/*.toLowerCase()*/;
 
         // Regex to exclude unwanted characters
         const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 
         // Disable validating if username is too short
-        if (val.length < 3) {
+        if (val.length < 3 || val.length > 100) {
             setFormValue(val);
             setLoading(false);
             setIsValid(false);
