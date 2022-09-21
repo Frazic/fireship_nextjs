@@ -12,7 +12,7 @@ export default function Navbar() {
             <ul>
                 <li>
                     <Link href="/">
-                        <button title="Home Page" className="btn-logo">FEED</button>
+                        <a><button title="Home Page" className="btn-logo">FEED</button></a>
                     </Link>
                 </li>
 
@@ -24,12 +24,12 @@ export default function Navbar() {
                         </li>
                         <li>
                             <Link href="/admin">
-                                <button title="Write Posts" className="btn-blue">Your Posts</button>
+                                <a><button title="Write Posts" className="btn-blue">Your Posts</button></a>
                             </Link>
                         </li>
                         <li>
                             <Link href={`/${username}`}>
-                                <img title="User Profile" src={user?.photoURL} alt="" />
+                                <a><img title="User Profile" src={user?.photoURL} alt="" /></a>
                             </Link>
                         </li>
                     </>
@@ -40,7 +40,7 @@ export default function Navbar() {
                 {!username && (
                     <li>
                         <Link href="/enter">
-                            <button title="Log in" className="btn-blue">Log in</button>
+                            <a><button title="Log in" className="btn-blue">Log in</button></a>
                         </Link>
                     </li>
                 )}

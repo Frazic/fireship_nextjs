@@ -53,7 +53,7 @@ function PostManager() {
 
                         {/* Link to live view */}
                         <Link href={`/${post.username}/${post.slug}`}>
-                            <button title='Live view' style={{ marginRight: 0 }} className="btn-blue">Live view</button>
+                            <a><button title='Live view' style={{ marginRight: 0 }} className="btn-blue">Live view</button></a>
                         </Link>
 
                         <DeletePostButton postRef={postRef} />

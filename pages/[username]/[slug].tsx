@@ -84,13 +84,13 @@ export default function Post(props) {
                 <AuthCheck
                     fallback={
                         <Link href="/enter">
-                            <button title="Sign Up" className="btn-heart">💗 Sign Up</button>
+                            <a><button title="Sign Up" className="btn-heart">💗 Sign Up</button></a>
                         </Link>
                     }
                 >
                     <HeartButton postRef={postRef} />
                     <Link href={`/admin/${post.slug}`}>
-                        <button style={{ marginRight: 0 }} className="btn-blue" title="Edit">Edit</button>
+                        <a><button style={{ marginRight: 0 }} className="btn-blue" title="Edit">Edit</button></a>
                     </Link>
                 </AuthCheck>
             </aside>
