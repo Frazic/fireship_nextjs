@@ -25,12 +25,12 @@ export default function Navbar() {
                             </Link>
                         </li>
                         <li>
+                            <SignOutButton />
+                        </li>
+                        <li>
                             <Link href={`/${username}`}>
                                 <img title="User Profile" src={user?.photoURL} alt="" />
                             </Link>
-                        </li>
-                        <li>
-                            <SignOutButton />
                         </li>
                     </>
 
