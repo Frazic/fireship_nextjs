@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
+import DarkModeButton from "./DarkModeButton";
 import SignOutButton from "./SignOutButton";
 
 export default function Navbar() {
@@ -31,6 +32,9 @@ export default function Navbar() {
                             <Link href={`/${username}`}>
                                 <a><img title="User Profile" src={user?.photoURL} alt="" /></a>
                             </Link>
+                        </li>
+                        <li>
+                            <DarkModeButton />
                         </li>
                     </>
 
