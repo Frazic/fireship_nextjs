@@ -129,8 +129,10 @@ function PostForm({ postRef, defaultValues, preview }) {
 
                 {/* Published or not checkbox */}
                 <fieldset>
-                    <input className={styles.checkbox} name="published" type="checkbox" {...register("published")} />
-                    <label>Published</label>
+                    <label>
+                        <input className={styles.checkbox} name="published" type="checkbox" {...register("published")} />
+                        Published
+                    </label>
                 </fieldset>
 
                 {/* Submit button
