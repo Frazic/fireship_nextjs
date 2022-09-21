@@ -91,6 +91,9 @@ function UsernameForm() {
                 console.log(`Firestore read executed for ${username}`);
                 setIsValid(!exists);
                 setLoading(false);
+            } else {
+                setIsValid(false);
+                setLoading(false);
             }
         }, 500),
         []
@@ -116,9 +119,9 @@ function UsernameForm() {
             <section>
                 <h3>Choose Username</h3>
                 <form onSubmit={onSubmit}>
-                    <input name="username" placeholder="username" value={formValue} onChange={onChange}></input>
+                    <input title="username" name="username" placeholder="username" value={formValue} onChange={onChange}></input>
 
-                    <InputValidationMessage value={username} valueName="username" isValid={isValid} loading={loading} />
+                    <InputValidationMessage value={formValue} valueName="username" isValid={isValid} loading={loading} />
 
                     <button type="submit" className="btn-green" disabled={!isValid}>
                         Choose

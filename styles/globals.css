@@ -294,7 +294,7 @@ input[type="file"] {
 .grid-image-upload-snippet {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 10px 100px;
+  grid-template-rows: 35px 100px;
 }
 
 .markdown-word-wrap {

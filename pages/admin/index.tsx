@@ -119,7 +119,7 @@ function CreateNewPost() {
                 title="Post title"
                 value={title}
                 onChange={onChange}
-                placeholder="My Awesome Article"
+                placeholder="My amazing post"
                 className={styles.input}
             />
 

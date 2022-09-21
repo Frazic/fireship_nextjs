@@ -2,7 +2,7 @@ import Link from "next/link";
 import HeartCount from "./HeartCount";
 
 export default function PostFeed({ posts, admin }) {
-    return posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : <></>;
+    return posts?.length > 0 ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : <p>There are no posts 😮, how about you write the first one?</p>;
 }
 
 function PostItem({ post, admin = false }) {

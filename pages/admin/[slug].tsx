@@ -49,11 +49,11 @@ function PostManager() {
                     <aside>
                         <h3>Tools</h3>
                         {/* Button to switch between preview and edit mode */}
-                        <button onClick={() => setPreview(!preview)}>{preview ? "Edit" : "Preview"}</button>
+                        <button title={preview ? "Edit" : "Preview"} style={{ marginRight: 0 }} onClick={() => setPreview(!preview)}>{preview ? "Edit" : "Preview"}</button>
 
                         {/* Link to live view */}
                         <Link href={`/${post.username}/${post.slug}`}>
-                            <button className="btn-blue">Live view</button>
+                            <button title='Live view' style={{ marginRight: 0 }} className="btn-blue">Live view</button>
                         </Link>
 
                         <DeletePostButton postRef={postRef} />
@@ -189,7 +189,7 @@ function DeletePostButton({ postRef }) {
     };
 
     return (
-        <button className="btn-red" onClick={deletePost}>
+        <button title='Delete' style={{ marginRight: 0 }} className="btn-red" onClick={deletePost}>
             Delete
         </button>
     );
