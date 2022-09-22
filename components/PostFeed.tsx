@@ -14,7 +14,7 @@ function PostItem({ post, admin = false }) {
         <div className="card">
             <Link href={`/${post.username}`}>
                 <a title={"To " + post.username + "'s profile"}>
-                    <strong>By @{post.username}</strong>
+                    By <strong className="text-info">@{post.username}</strong>
                 </a>
             </Link>
 

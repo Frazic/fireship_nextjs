@@ -33,21 +33,22 @@ export default function Navbar() {
                                 <a><img title="User Profile" src={user?.photoURL} alt="" /></a>
                             </Link>
                         </li>
-                        <li>
-                            <DarkModeButton />
-                        </li>
                     </>
 
                 )}
 
                 {/* user is not signed-in OR has not created username */}
                 {!username && (
-                    <li>
+                    <li className="push-left">
                         <Link href="/enter">
                             <a><button title="Log in" className="btn-blue">Log in</button></a>
                         </Link>
                     </li>
                 )}
+
+                <li>
+                    <DarkModeButton />
+                </li>
             </ul>
         </nav>
     )

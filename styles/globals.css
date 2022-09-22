@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap');
 
+/* Dark mode by default */
 :root {
-  --color-bg: #eef0f1;
-  --color-text: #08090a;
-  --color-white: #ffffff;
-  --color-blue: #3b49df;
-  --color-light-blue: #82ccdd;
-  --color-red: #df3b3b;
-  --color-green: #3bdf72;
-  --color-gray: #b5bdc4;
+  --color-bg: #16213E;
+  --color-text: #eef0f1;
+  --color-white: #0F3460;
+  --color-blue: #4e59d6;
+  --color-light-blue: #537EC5;
+  --color-red: #C74B50;
+  --color-green: #4E9F3D;
+  --color-gray: #3C4F65;
 }
+
 html,
 body{
   padding: 0;
@@ -47,12 +49,19 @@ a:has(button) {
 img {max-width: 100%;}
 
 input {
+  background-color: var(--color-white);
+  color: var(--color-text);
   display: inline-block;
   outline: none;
   border: none;
   font-size: 1.5rem;
   width: 100%;
   padding: 5px 10px;
+}
+
+::placeholder {
+  color: var(--color-text);
+  opacity: 75%;
 }
 
 fieldset {
@@ -141,17 +150,17 @@ button[disabled]{
 
 button.btn-blue {
   background-color: var(--color-blue);
-  color: var(--color-white);
+  color: var(--color-text);
 }
 
 button.btn-red {
   background-color: var(--color-red);
-  color: var(--color-white);
+  color: var(--color-text);
 }
 
 button.btn-green {
   background-color: var(--color-green);
-  color: var(--color-white);
+  color: var(--color-text);
 }
 
 button.btn-google {
@@ -179,7 +188,7 @@ button.btn-heart {
 }
 
 button.btn-theme {
-  background-color: var(--color-gray);
+  background-color: var(--color-light-blue);
   align-items: center;
   opacity: 80%;
   width: 50px;
@@ -204,6 +213,7 @@ button.btn-theme > img {
   background-color: var(--color-white);
   border: 1px solid var(--color-gray);
   border-radius: 8px;
+  border-color: var(--color-light-blue);
 }
 
 .card footer {
@@ -275,12 +285,12 @@ input[type="file"] {
 
 .text-info {
   font-weight: bold;
-  color: var(--color-blue);
+  color: var(--color-green);
 }
 
 .text-link {
   font-weight: bold;
-  color: var(--color-blue);
+  color: var(--color-green);
   text-decoration: underline;
 }
 
@@ -301,6 +311,8 @@ input[type="file"] {
 /* Custom */
 
 .custom-textarea {
+  background-color: var(--color-white);
+  color: var(--color-text);
   outline: none;
   overflow: auto;
 }
