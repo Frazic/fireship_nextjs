@@ -14,9 +14,9 @@
 
 html,
 body{
+  font-family: 'Noto Sans', sans-serif;
   padding: 0;
   margin: 0;
-  font-family: 'Noto Sans', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   margin-top: 50px;
@@ -269,6 +269,10 @@ input[type="file"] {
   margin-left: auto;
 }
 
+.push-right {
+  margin-right: auto;
+}
+
 .text-sm {
   font-size: 0.85rem;
 }
@@ -336,4 +340,30 @@ input[type="file"] {
 .markdown-word-wrap {
   overflow-wrap: break-word;
   hyphens: auto;
+}
+
+ul.footer{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+li.footer {
+  border-radius: 50%;
+}
+
+select.footer {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  border-radius: 20%;
+  border-color: transparent;
+  font-weight: bold;
+}
+
+option.footer {
+  font-weight: bold;
 }
