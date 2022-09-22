@@ -7,7 +7,7 @@ import MetaTags from "../components/Metatags";
 import { fromMillis } from "../lib/firebase";
 
 // Max post to query per page
-const LIMIT = 1;
+const LIMIT = 10;
 
 // Have the server get the latest posts from firestore
 export async function getServerSideProps() {

@@ -7,6 +7,8 @@ import HeartCount from "../../components/HeartCount";
 import AuthCheck from "../../components/AuthCheck";
 import HeartButton from "../../components/HeartButton";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "../../lib/context";
 
 // Tells next to get data from server at build time
 export async function getStaticProps({ params }) {
@@ -63,6 +65,7 @@ export default function Post(props) {
     // Easy access to document with direct path inside firestore
     const postRef = firestore.doc(props.path);
     const [realtimePost] = useDocumentData(postRef);
+    const { username } = useContext(UserContext);
 
     // Gets the latest version of the post, or fallsback to the prerendered data
     const post = realtimePost || props.post;
@@ -89,9 +92,12 @@ export default function Post(props) {
                     }
                 >
                     <HeartButton postRef={postRef} />
-                    <Link href={`/admin/${post.slug}`}>
-                        <a><button style={{ marginRight: 0 }} className="btn-blue" title="Edit">Edit</button></a>
-                    </Link>
+                    {
+                        username == post.username &&
+                        <Link href={`/admin/${post.slug}`}>
+                            <a><button style={{ marginRight: 0 }} className="btn-blue" title="Edit">Edit</button></a>
+                        </Link>
+                    }
                 </AuthCheck>
             </aside>
         </main >
